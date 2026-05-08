@@ -1,107 +1,124 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <title>small_guys_prox</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0; padding: 0;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: white;
-      font-family: system-ui, sans-serif;
-    }
-    .glass {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 16px;
-      padding: 30px;
-      max-width: 1000px;
-      margin: 40px auto;
-    }
-    button {
-      padding: 14px 24px;
-      margin: 8px;
-      border: none;
-      border-radius: 12px;
-      background: #7b00ff;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover { background: #9d4aff; transform: scale(1.05); }
-    input { padding: 14px; width: 75%; border-radius: 10px; border: none; margin: 10px 0; }
-  </style>
-</head>
-<body>
-  <div id="loginScreen" class="glass">
-    <h1>small_guys_prox</h1>
-    <p>Advanced Proxy</p>
-    <input type="password" id="sitePassInput" placeholder="Site Password">
-    <button onclick="checkSitePassword()">Enter</button>
-  </div>
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+		/>
+		<title>Ultraviolet | Sophisticated Web Proxy</title>
+		<meta
+			name="description"
+			content="Ultraviolet is a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Unblock sites today!"
+		/>
+		<meta
+			name="keywords"
+			content="proxy, web proxy, ultraviolet, service workers, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="#434c5e"
+		/>
+		<meta name="googlebot" content="index, follow, snippet" />
+		<link rel="shortcut icon" content="favicon.ico" />
+		<link rel="stylesheet" href="index.css" />
+		
 
-  <div id="mainApp" style="display:none;" class="glass">
-    <button onclick="toggleTheme()">🌗 Light / Dark</button>
-    <button onclick="openDevTools()">🔧 Dev Tools</button>
-    <button onclick="cloakTab('Google')">Tab Cloak → Google</button>
-    <button onclick="cloakTab('')">Tab Cloak → about:blank</button>
+		<script src="baremux/index.js"></script>
+		<script src="uv/uv.bundle.js"></script>
+		<script src="uv/uv.config.js"></script>
 
-    <input id="cloakUrlInput" placeholder="URL Cloak (about:blank)" style="width:60%;">
-    <button onclick="applyUrlCloak()">Apply Cloak</button>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				"mainEntity": [
+					{
+						"@type": "Question",
+						"name": "What is Ultraviolet (Web Proxy)?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!"
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "How do I unblock sites using Ultraviolet?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Simply head to an official site featuring Ultraviolet such as Holy Unblocker or Incognito! You can also self-host Ultraviolet on your own web server for maximum privacy."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "What if Ultraviolet is blocked or not working?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Join the Titanium Network Discord at discord.gg/unblock!"
+						}
+					}
+				]
+			}
+		</script>
+	</head>
 
-    <br><br>
-    <input id="proxyInput" placeholder="Enter URL (crazygames.com)" style="width:70%;">
-    <button onclick="startProxy()">Go</button>
+	<body>
+		<div
+			title="Ultraviolet Logo"
+			class="flex-center logo-wrapper header-center"
+		>
+			<img class="logo" src="uv.png" alt="Ultraviolet" />
+			<h1>Ultraviolet | TN</h1>
+		</div>
+		<div class="flex-center desc left-margin">
+			<p>
+				Ultraviolet is highly sophisticated proxy used for evading internet
+				censorship.
+			</p>
+		</div>
 
-    <iframe id="proxyFrame" style="width:100%; height:80vh; border:none; margin-top:20px;"></iframe>
-  </div>
-
-  <script>
-    let sitePassword = "May_the_purv_be_with_you";
-    let devPassword = "Hi@12345";
-
-    function checkSitePassword() {
-      if (document.getElementById("sitePassInput").value === sitePassword) {
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-      } else alert("Wrong Password!");
-    }
-
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute("data-theme");
-      document.documentElement.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-    }
-
-    function cloakTab(title) {
-      document.title = title || "";
-    }
-
-    function applyUrlCloak() {
-      const url = document.getElementById("cloakUrlInput").value.trim() || "about:blank";
-      history.pushState({}, "", url);
-    }
-
-    function openDevTools() {
-      const pass = prompt("Enter Dev Tools Password:");
-      if (pass !== devPassword) return alert("Wrong Dev Password!");
-
-      const newSite = prompt("New Site Password:", sitePassword);
-      if (newSite) sitePassword = newSite;
-
-      const newDev = prompt("New Dev Tools Password:", devPassword);
-      if (newDev) devPassword = newDev;
-
-      alert("Dev Tools Opened!");
-    }
-
-    function startProxy() {
-      let url = document.getElementById("proxyInput").value.trim();
-      if (!url) return alert("Enter a URL!");
-      if (!url.startsWith("http")) url = "https://" + url;
-      document.getElementById("proxyFrame").src = url;
-    }
-  </script>
-</body>
+		<form id="uv-form" class="flex-center">
+			<input
+				id="uv-search-engine"
+				value="https://www.google.com/search?q=%s"
+				type="hidden"
+			/>
+			<input id="uv-address" type="text" placeholder="Search the web freely" />
+		</form>
+		<div class="desc left-margin">
+			<p id="uv-error"></p>
+			<pre id="uv-error-code"></pre>
+		</div>
+		<footer>
+			<div>
+				<a
+					title="The TitaniumNetwork GitHub organization"
+					href="https://github.com/titaniumnetwork-dev"
+					>TitaniumNetwork</a
+				>
+				<a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
+					>Discord</a
+				>
+				<a
+					title="The TompHTTP GitHub organization"
+					href="https://github.com/tomphttp"
+					>TompHTTP</a
+				>
+				<a
+					title="The official deployment repository for Ultraviolet"
+					href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
+					>GitHub</a
+				>
+				<a title="License information" href="credits.html">Credits</a>
+			</div>
+			<div>
+				<span>Ultraviolet &copy; TN 2023</span>
+			</div>
+		</footer>
+		<iframe style="display: none" id="uv-frame"></iframe>
+		<script src="register-sw.js"></script>
+		<script src="search.js"></script>
+		<script src="index.js"></script>
+	</body>
 </html>
